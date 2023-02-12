@@ -36,7 +36,9 @@ receta si es así la instala.
 
 #### ¿ Dónde viven las recetas ?
 
-En la nube. O más concretamente en Github. (github.com/symfony/recipes)
+En la nube. O más concretamente en Github (github.com/symfony/recipes) las aprobadas por el equipo de Symfony.
+En github.com/symfony/recipes-contrib las que no están aprobadas por el equipo pero esto no quiere decir que no
+sean buenas.
 Para comprobar las recetas que tenemos instaladar en un proyecto podemos ejecutar el comando:
 `composer recipes`
 Si queremos información de una receta en concreto ejecutaremos:
@@ -53,3 +55,35 @@ Lo segundo es copiar los archivos que lleva la receta en los archivos con el mis
 
 Un bundle es un plugin que le da nuevas características a Symfony.
 Para activar un bundle tiene que estar en el archivo config/bundles.php
+
+## Controller
+
+Los controladores normalmente heredan de AbstractController para acceder a métodos que hacen 
+cosas interesantes como renderizar una plantilla(template).
+
+## Twig
+
+En Twig tenemos 3 sintaxis diferentes.
+
+Para imprimir una variable utilizamos => {{ }}
+Para comentarios => {# #}
+Utilizar PHP o hacer algo => {% %} 
+
+Para twig tenemos etiquetas(if, for, block...), filtros(title, sort, reverse...), funciones(max, random...)
+y tests que sirven para los ifs(divisibleby, empty ...).
+Podemos consultar la documentación en -> https://twig.symfony.com/doc/
+
+#### Extensión de plantillas
+
+`{% extends 'base.html.twig' %}` 
+
+Cuando extendemos base.html.twig en otra plantilla. Le estamos diciendo a twig que reenderice base.html.twig
+y que inserte en el contenido del archivo del template en el que hemos introducido la expresión de la primera línea.
+Debemos indicarle en qué parte de base.html.twig queremos que aparezca dicho contenido. 
+Para ello rodeamos el contenido con 
+`{% block body %}`
+  `<div>`
+    `contenido`
+  `</div>`
+ `{% endblock %}`
+En base.html.twig tendremos `{% block body %}{% endblock %}`
