@@ -60,6 +60,10 @@ Para activar un bundle tiene que estar en el archivo config/bundles.php
 
 Los controladores normalmente heredan de AbstractController para acceder a métodos que hacen 
 cosas interesantes como renderizar una plantilla(template).
+Un controlador debe devolver siempre un objeto Symfony Response.
+La función del controlador puede tener dos tipos de argumentos:
+  1. Uno cuyo nombre coincida con el comodín de la ruta.
+  2. Uno cuyo tipo-indicación coincida con uno de los servicios de nuesta aplicación.  
 
 ## Twig
 
@@ -87,3 +91,40 @@ Para ello rodeamos el contenido con
   `</div>`
  `{% endblock %}`
 En base.html.twig tendremos `{% block body %}{% endblock %}`
+
+## Depurador
+
+Para añadir un sistema de depuración que nos muestre información sobre nuestro proyecto(barra de herramientas 
+de depuración web) ejecutamos el comando `composer require debug`. Es otro alias que nos instala paquetes y recetas 
+referentes a la depuración del proyecto.
+
+## Rutas
+
+Las rutas se puden restringir a un determinado método(GET, POST, PUT).
+Ejemplo: `#[Route('/api/songs/{id}', methods: ['GET'])]` => Sólo funcionará 
+con el método GET.
+
+Para vert informacón sobre las rutas de nuestro proyecto utilizamos:
+`php bin/console debug:router`
+
+Para comprobar el funcionamiento de una ruta concreta con un método concreto:
+`php bin/console router:match /api/songs/11 --method=POST`
+
+## Servicios
+
+Los servicios son objetos que realizan un trabajo. Los servicios son herramientas. Symfony está
+repleto de objetos que hacen su trabajo. Todo el trabajo en symfony lo hace un servicio.
+
+Los más conocidos son: Twig, Logger, Cache, Database Conection, API Requests, Router.
+Cuando instalamos un paquete obtendremos más objetos útiles.
+
+Para consultar los servicios de nuestro proyecto:
+`php bin/console debug:autowiring`
+
+Si queremos buscar uno en específico, por ejemplo relacionado con twig:
+`php bin/console debug:autowiring twig`
+
+## Webpack
+
+Es la herramienta estándar de la industria para empaquetar, minimizar y analizar nuestro CSS, JS y otros
+archivos del Frontend.
