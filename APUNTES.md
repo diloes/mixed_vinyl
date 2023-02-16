@@ -127,4 +127,7 @@ Si queremos buscar uno en específico, por ejemplo relacionado con twig:
 ## Webpack
 
 Es la herramienta estándar de la industria para empaquetar, minimizar y analizar nuestro CSS, JS y otros
-archivos del Frontend.
+archivos del Frontend. En Symfony el paquete se llama 'Encore Webpack'.
+
+Para instalar: `composer require encore`.
+Después necesitamos instalar algunos paquetes de Node con `yarn install`.
