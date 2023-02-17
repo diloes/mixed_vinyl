@@ -131,3 +131,14 @@ archivos del Frontend. En Symfony el paquete se llama 'Encore Webpack'.
 
 Para instalar: `composer require encore`.
 Después necesitamos instalar algunos paquetes de Node con `yarn install`.
+
+Gracias a estas líneas:
+`{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+ {% endblock %}
+
+ {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+ {% endblock %}`
+
+Podemos guardar en /assets los CSS y JS para que se reendericen en nuestro html.
