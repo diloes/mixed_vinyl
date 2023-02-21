@@ -2,6 +2,12 @@
 
 Este proyecto es el primer curso de una serie de cursos sobre Symfony 6.0 de la web symfonycasts.  
 
+## Sobre Symfony
+
+Es un framework PHP que sirve tanto para el backend como para el frontend. 
+
+Symfony es una colección de muchas bibliotecas diferentes llamadas componentes.
+
 ## Inicio Proyecto
 
 Hemos creado un proyecto base con el comando `symfony new mixed_vinyl`. 
@@ -77,6 +83,8 @@ Para twig tenemos etiquetas(if, for, block...), filtros(title, sort, reverse...)
 y tests que sirven para los ifs(divisibleby, empty ...).
 Podemos consultar la documentación en -> https://twig.symfony.com/doc/
 
+Para ver los filtros de twig disponibles en nuestro proyecto utilizamos: `php bin/console debug:twig`
+
 #### Extensión de plantillas
 
 `{% extends 'base.html.twig' %}` 
@@ -123,6 +131,12 @@ Para consultar los servicios de nuestro proyecto:
 
 Si queremos buscar uno en específico, por ejemplo relacionado con twig:
 `php bin/console debug:autowiring twig`
+
+Podemos autoconectar cualquier servicio de esa lista en nuestro controlador utilizando su tipo.
+
+Cuando necesitemos un servicio buscaremos el bundle(plugin) que nos lo proporciones. Normalmente bastará
+con poner en google el problema que queremos solucionar más 'symfony bundle'. Ya sean bundles de symfony
+o de terceros.  
 
 ## Webpack
 

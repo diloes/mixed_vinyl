@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,16 +34,37 @@ class VinylController extends AbstractController
   #[Route('/browse/{slug}', name: 'app_browse')] 
   public function browse(string $slug = null): Response
   {
-    if ($slug) {
-      $title = 'Género: '.u(str_replace('-', ' ', $slug))->title(true);
-    } else {
-      $title = 'Todos los géneros.';
-    }
-
     $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
+    $mixes = $this->getMixes();
     
     return $this->render('vinyl/browse.html.twig', [
       'genre' => $genre,
+      'mixes' => $mixes
     ]);
   }
+
+  private function getMixes(): array
+    {
+      // data fake temporal 
+      return [
+        [
+          'title' => 'PB & Jams',
+          'trackCount' => 14,
+          'genre' => 'Rock',
+          'createdAt' => new DateTime('2023-02-20')
+        ],
+        [
+          'title' => 'Put a Hex on your Ex',
+          'trackCount' => 8,
+          'genre' => 'Heavy Metal',
+          'createdAt' => new DateTime('2023-01-19')
+        ],
+        [
+          'title' => 'Spice Grills - Summer Tunes',
+          'trackCount' => 10,
+          'genre' => 'Pop',
+          'createdAt' => new DateTime('2022-10-19')
+        ]
+      ];
+    }
 }
