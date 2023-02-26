@@ -40,7 +40,7 @@ Flex tiene 3 superpoderes:
 Cada vez que instalamos un nuevo paquete, flex comprueba en un repositorio central si el paquete contiene una 
 receta si es así la instala.
 
-#### ¿ Dónde viven las recetas ?
+#### ¿ Dónde viven las recetas ?
 
 En la nube. O más concretamente en Github (github.com/symfony/recipes) las aprobadas por el equipo de Symfony.
 En github.com/symfony/recipes-contrib las que no están aprobadas por el equipo pero esto no quiere decir que no
@@ -84,7 +84,7 @@ La función del controlador puede tener dos tipos de argumentos:
   1. Uno cuyo nombre coincida con el comodín de la ruta.
   2. Uno cuyo tipo-indicación coincida con uno de los servicios de nuesta aplicación.  
 
-## Twig
+## Twig
 
 En Twig tenemos 3 sintaxis diferentes.
 
@@ -113,13 +113,13 @@ Para ello rodeamos el contenido con
  `{% endblock %}`
 En base.html.twig tendremos `{% block body %}{% endblock %}`
 
-## Depurador
+## Depurador
 
 Para añadir un sistema de depuración que nos muestre información sobre nuestro proyecto(barra de herramientas 
 de depuración web) ejecutamos el comando `composer require debug`. Es otro alias que nos instala paquetes y recetas 
 referentes a la depuración del proyecto.
 
-## Rutas
+## Rutas
 
 Las rutas se puden restringir a un determinado método(GET, POST, PUT).
 Ejemplo: `#[Route('/api/songs/{id}', methods: ['GET'])]` => Sólo funcionará 
@@ -170,7 +170,7 @@ Gracias a estas líneas:
 
 Podemos guardar en /assets los CSS y JS para que se reendericen en nuestro html.
 
-## Cache
+## Cache
 
 Hay ocasiones en las que vamos a necesitar usar la memoria caché. Por ejemplo si tenemos que hacer peticiones http
 a una URL que tiene estas peticiones limitadas y queremos minimizar estas.
