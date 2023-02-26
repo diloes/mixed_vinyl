@@ -2,20 +2,20 @@
 
 Este proyecto es el primer curso de una serie de cursos sobre Symfony 6.0 de la web symfonycasts.  
 
-## Sobre Symfony
+## Sobre Symfony
 
 Es un framework PHP que sirve tanto para el backend como para el frontend. 
 
 Symfony es una colección de muchas bibliotecas diferentes llamadas componentes.
 
-## Inicio Proyecto
+## Inicio Proyecto
 
 Hemos creado un proyecto base con el comando `symfony new mixed_vinyl`. 
 
 Hemos creado el controlador VinylController a mano con dos rutas, una sencilla('/') y
 otra dinámica ruta 'dinámica'('/browse/{slug}').
 
-## Instalando templates
+## Instalando templates
 
 Para instalar una biblioteca de templates hemos utilizado el comando `composer require templates`.
 'templates' es un alias que podemos utilizar gracias a el plugin de composer 'Flex' que previamente
@@ -35,7 +35,7 @@ Flex tiene 3 superpoderes:
       Por ejemplo en el caso de el paquete 'templates' crea la carpeta /templates en el proyecto y el archivo
       config/packages/twig.yaml.
 
-## Las recetas en Symfony
+## Las recetas en Symfony
 
 Cada vez que instalamos un nuevo paquete, flex comprueba en un repositorio central si el paquete contiene una 
 receta si es así la instala.
