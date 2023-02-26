@@ -62,6 +62,19 @@ Lo segundo es copiar los archivos que lleva la receta en los archivos con el mis
 Un bundle es un plugin que le da nuevas características a Symfony.
 Para activar un bundle tiene que estar en el archivo config/bundles.php
 
+La configuración de los bundles está en la carpeta '/config/packages'. Dentro de los archivos .yaml podemos
+ver la configuración para cada bundle. 
+Los nombres de los archivos no son importantes, podrían moverse toda la configuración de todos los archivos
+a un sólo archivo y todo funcionaría.
+
+Si queremos comprobar qué podemos añadir a estas configuraciones por defecto ejecutamos el comando:
+`php bin/console debug:config twig` -> ejemplo sobre le bundle de Twig
+Esto nos da como resultado toda la configuración actual de este bundle con sus valores predeterminados, lo cual
+nos sirve de guía para añadir/cambiar estos en el archivo .yaml correspondiente.
+
+Hay un comando que nos muestra ejemplos con todos los casos de configuración posibles para el bundle que le pidamos:
+`php bin/console config:dump twig` -> ejemplo sobre le bundle de Twig
+
 ## Controller
 
 Los controladores normalmente heredan de AbstractController para acceder a métodos que hacen 
@@ -156,3 +169,19 @@ Gracias a estas líneas:
  {% endblock %}`
 
 Podemos guardar en /assets los CSS y JS para que se reendericen en nuestro html.
+
+## Cache
+
+Hay ocasiones en las que vamos a necesitar usar la memoria caché. Por ejemplo si tenemos que hacer peticiones http
+a una URL que tiene estas peticiones limitadas y queremos minimizar estas.
+
+Para usar la cache buscamos el servicio en nuestro proyecto:
+`php bin/console debug:autowiring cache`
+
+Utilizamos 'CacheInterface' en el controlador que vayamos a necesitarlo, pasándolo como argumento:
+`public function browse(HttpClientInterface $httpClient, CacheInterface $cache, string $slug = null): Response`
+
+Desde la consola podemos lanzar comandos para interactuar con la cache.
+`php bin/console cache:pool:list`
+
+Para elminar la cache -> `php bin/console cache:pool:clear cache.app`

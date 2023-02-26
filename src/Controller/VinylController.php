@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
-use DateTime;
+use Psr\Cache\CacheItemInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use function Symfony\Component\String\u;
 
 class VinylController extends AbstractController
@@ -32,39 +34,25 @@ class VinylController extends AbstractController
    * En este caso no es obligatorio pasarle algo porque iniciamos $slug en null.
    */
   #[Route('/browse/{slug}', name: 'app_browse')] 
-  public function browse(string $slug = null): Response
+  public function browse(HttpClientInterface $httpClient, CacheInterface $cache, string $slug = null): Response
   {
     $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
-    $mixes = $this->getMixes();
+    $mixes = $cache->get('mixes_data', function(CacheItemInterface $cacheItem) use ($httpClient){ // Ver punto 1 de NOTAS
+      $cacheItem->expiresAfter(5); // la caché expirará en 5 segundos
+      $response = $httpClient->request('GET', 'https://raw.githubusercontent.com/SymfonyCasts/vinyl-mixes/main/mixes.json');
+      return $response->toArray();
+    });
     
     return $this->render('vinyl/browse.html.twig', [
       'genre' => $genre,
       'mixes' => $mixes
     ]);
   }
-
-  private function getMixes(): array
-    {
-      // data fake temporal 
-      return [
-        [
-          'title' => 'PB & Jams',
-          'trackCount' => 14,
-          'genre' => 'Rock',
-          'createdAt' => new DateTime('2023-02-20')
-        ],
-        [
-          'title' => 'Put a Hex on your Ex',
-          'trackCount' => 8,
-          'genre' => 'Heavy Metal',
-          'createdAt' => new DateTime('2023-01-19')
-        ],
-        [
-          'title' => 'Spice Grills - Summer Tunes',
-          'trackCount' => 10,
-          'genre' => 'Pop',
-          'createdAt' => new DateTime('2022-10-19')
-        ]
-      ];
-    }
 }
+
+/**
+ * NOTAS:
+ * 1. Caché: La primera vez que carge la web no tendrá nada en caché, de este modo ejecutará función que le pasamos como segundo
+ * argumento en cache->get() la cual hará la petición a la URL y almacena la respuesta en la caché como un array por primera vez.
+ * Cuando volvamos a cargar la página ya obtendremos los datos de la caché en 'mixes_data'.
+ */
